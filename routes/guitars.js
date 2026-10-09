@@ -49,6 +49,13 @@ router.post('/', ensureAuth, jsonParser, async function (req, res, next) {
 	const newGuitar = await guitarService.create(Year, Price, BrandId, ModelId, ColorId);
 	res.status(200).json({ success: true, message: "Guitar added successfully.", newGuitar });
 });
-
+/* DELETE new Guitar */
+router.delete('/:id', ensureAuth, jsonParser, async function (req, res, next) {
+    await guitarService.deleteGuitar(req.params.id);
+    res.status(200).json({
+        success: true,
+        message: "Guitar deleted successfully."
+    });
+});
 module.exports = router;
 
